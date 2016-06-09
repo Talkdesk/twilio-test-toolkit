@@ -8,10 +8,6 @@ Rails.backtrace_cleaner.remove_silencers!
 
 require 'rspec/rails'
 
-# Set up capybara integration
-require 'capybara/rspec'
-require 'capybara/rails'
-
 # Our gem
 require 'twilio-test-toolkit'
 

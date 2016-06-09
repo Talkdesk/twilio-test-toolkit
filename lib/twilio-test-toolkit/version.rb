@@ -1,3 +1,3 @@
 module TwilioTestToolkit
-  VERSION = "3.4.0"
+  VERSION = "4.4.0"
 end

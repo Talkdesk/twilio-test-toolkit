@@ -20,7 +20,8 @@ Gem::Specification.new do |s|
 
   s.require_paths = ["lib"]
   
-  s.add_dependency 'capybara'
+  s.add_dependency 'httparty'
+  s.add_dependency 'nokogiri'
   s.add_dependency 'uuidtools'
   
   s.add_development_dependency "rails", "~> 3.2.12"

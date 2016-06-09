@@ -1,3 +1,6 @@
+require 'httparty'
+require 'nokogiri'
+
 module TwilioTestToolkit
   # Models a scope within a call.
   class CallScope
@@ -215,19 +218,20 @@ module TwilioTestToolkit
         @current_path = normalize_redirect_path(path)
 
         # Post the query
-        rack_test_session_wrapper = Capybara.current_session.driver
-        @response = rack_test_session_wrapper.send(options[:method] || :post, @current_path,
-          :format => :xml,
-          :CallSid => @root_call.sid,
-          :From => @root_call.from_number,
-          :Digits => formatted_digits(options[:digits].to_s, :finish_on_key => options[:finish_on_key]),
-          :To => @root_call.to_number,
-          :AnsweredBy => (options[:is_machine] ? "machine" : "human"),
-          :CallStatus => options.fetch(:call_status, "in-progress")
+        @response = ::HTTParty.send(options[:method] || :post, @current_path,
+          body: {
+            :format => :xml,
+            :CallSid => @root_call.sid,
+            :From => @root_call.from_number,
+            :Digits => formatted_digits(options[:digits].to_s, :finish_on_key => options[:finish_on_key]),
+            :To => @root_call.to_number,
+            :AnsweredBy => (options[:is_machine] ? "machine" : "human"),
+            :CallStatus => options.fetch(:call_status, "in-progress")
+          }
         )
 
         # All Twilio responses must be a success.
-        raise "Bad response: #{@response.status}" unless @response.status == 200
+        raise "Bad response: #{@response.code}" unless @response.code == 200
 
         # Load the xml
         data = @response.body
