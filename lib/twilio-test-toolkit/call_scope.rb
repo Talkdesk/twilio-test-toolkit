@@ -27,6 +27,10 @@ module TwilioTestToolkit
       return normalize_redirect_path(el.text) == normalize_redirect_path(url)
     end
 
+    def redirect(url)
+      return CallScope.from_request(self, url)
+    end
+
     def follow_redirect(options = {})
       el = get_redirect_node
       raise "No redirect" if el.nil?

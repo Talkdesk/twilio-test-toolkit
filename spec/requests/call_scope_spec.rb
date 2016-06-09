@@ -86,6 +86,8 @@ describe TwilioTestToolkit::CallScope do
       it "should consider options for follow_redirect!"
 
       it "should consider options for follow_redirect"
+
+      it "should allow the call to be modified (#redirect)"
     end
 
     describe "failure" do
