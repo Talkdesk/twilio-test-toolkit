@@ -22,6 +22,8 @@ module TwilioTestToolkit
         @sid = options[:call_sid]
       end
 
+      @account_sid = options[:account_sid]
+
       # We are the root call
       self.root_call = self
 
@@ -51,6 +53,10 @@ module TwilioTestToolkit
 
     def http_method
       @method
+    end
+
+    def account_sid
+      @account_sid
     end
   end
 end

@@ -226,7 +226,8 @@ module TwilioTestToolkit
             :Digits => formatted_digits(options[:digits].to_s, :finish_on_key => options[:finish_on_key]),
             :To => @root_call.to_number,
             :AnsweredBy => (options[:is_machine] ? "machine" : "human"),
-            :CallStatus => options.fetch(:call_status, "in-progress")
+            :CallStatus => options.fetch(:call_status, "in-progress"),
+            :AccountSid => @root_call.account_sid,
           }
         )
 
